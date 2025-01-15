@@ -14,8 +14,8 @@ A template project for quickly getting started with the Scrapybara SDK and Act S
 1. Clone this repository:
 
 ```bash
-git clone <your-repo-url>
-cd <repo-name>
+git clone https://github.com/scrapybara/scrapybara-ts-template.git
+cd scrapybara-ts-template
 ```
 
 2. Install dependencies using pnpm:
