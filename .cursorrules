@@ -85,7 +85,7 @@ console.log(`Result: ${result.result}`);
 console.log(`Tokens: ${step.usage?.totalTokens ?? 'N/A'}`);
 };
 
-const messages = await client.act({
+const { messages, steps, text, output, usage } = await client.act({
 model: anthropic(),
 tools,
 system: "System context",
@@ -110,7 +110,7 @@ const client = new ScrapybaraClient();
 const instance = await client.start();
 await instance.browser.start();
 
-const messages = await client.act({
+const { messages, steps, text, output, usage } = await client.act({
 model: anthropic(),
 tools: [
 bashTool(instance),
@@ -133,7 +133,7 @@ EXECUTION PATTERNS:
 
 1. Basic agent execution:
 
-const messages = await client.act({
+const { messages, steps, text, output, usage } = await client.act({
 model: anthropic(),
 tools,
 system: "System context here",

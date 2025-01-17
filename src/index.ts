@@ -7,6 +7,7 @@ import {
   editTool,
   browserTool,
 } from "scrapybara/tools";
+import { z } from "zod";
 import * as dotenv from "dotenv";
 
 dotenv.config();
@@ -17,30 +18,35 @@ async function main() {
   });
 
   const instance = await client.start();
+  instance.browser.start();
 
   try {
-    await instance.browser.start();
-
-    await client.act({
+    const { output } = await client.act({
+      model: anthropic(),
       tools: [
-        computerTool(instance),
         bashTool(instance),
+        computerTool(instance),
         editTool(instance),
         browserTool(instance),
       ],
-      model: anthropic({
-        apiKey: process.env.ANTHROPIC_API_KEY,
-      }),
       system: SYSTEM_PROMPT,
-      prompt:
-        "There is a browser open on the screen (you can take ss to confirm). Go to scrapybara.com and tell me what you see.",
-      onStep: (step) => {
-        console.log(step);
-      },
+      prompt: "Get the top 10 posts on Hacker News",
+      schema: z.object({
+        posts: z.array(
+          z.object({
+            title: z.string(),
+            url: z.string(),
+            points: z.number(),
+          })
+        ),
+      }),
+      onStep: (step) => console.log(step.text),
     });
-  } catch (error) {
-    console.error(error);
+
+    const posts = output?.posts;
+    console.log(posts);
   } finally {
+    await instance.browser.stop();
     await instance.stop();
   }
 }
