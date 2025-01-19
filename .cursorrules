@@ -4,10 +4,10 @@ CORE SDK USAGE:
 
 - Initialize client: import { ScrapybaraClient } from "scrapybara"; const client = new ScrapybaraClient({ apiKey: "KEY" });
 - Instance lifecycle:
-  const instance = await client.start({ instanceType: "small", timeoutHours: 1 });
-  await instance.pause(); // Pause to save resources
-  await instance.resume({ timeoutHours: 1 }); // Resume work
-  await instance.stop(); // Terminate and clean up
+const instance = await client.start({ instanceType: "small", timeoutHours: 1 });
+await instance.pause(); // Pause to save resources
+await instance.resume({ timeoutHours: 1 }); // Resume work
+await instance.stop(); // Terminate and clean up
 
 CORE INSTANCE OPERATIONS:
 
@@ -23,74 +23,74 @@ ACT SDK (Primary Focus):
 - Core components:
 
 1. Model: Handles LLM integration (currently Anthropic)
-   import { anthropic } from "scrapybara/anthropic";
-   const model = anthropic(); // Or model = anthropic({ apiKey: "KEY" }) for own key
+    import { anthropic } from "scrapybara/anthropic";
+    const model = anthropic(); // Or model = anthropic({ apiKey: "KEY" }) for own key
 
 2. Tools: Interface for computer interactions
 
-   - bashTool: Run shell commands
-   - computerTool: Mouse/keyboard control
-   - editTool: File operations
-   - browserTool: Web automation via Playwright
+    - bashTool: Run shell commands
+    - computerTool: Mouse/keyboard control
+    - editTool: File operations
+    - browserTool: Web automation via Playwright
 
 3. Basic tool setup:
-   import { bashTool, computerTool, editTool, browserTool } from "scrapybara/tools";
-
-   const tools = [
-   bashTool(instance),
-   computerTool(instance),
-   editTool(instance),
-   browserTool(instance)
-   ];
+    import { bashTool, computerTool, editTool, browserTool } from "scrapybara/tools";
+    
+    const tools = [
+        bashTool(instance),
+        computerTool(instance),
+        editTool(instance),
+        browserTool(instance)
+    ];
 
 MESSAGE HANDLING:
 
 - Response Structure: Messages are structured with roles (user/assistant/tool) and typed content
 - Content Types:
 - TextPart: Simple text content
-  { type: "text", text: "content" }
+    { type: "text", text: "content" }
 - ImagePart: Base64 or URL images
-  { type: "image", image: "base64...", mimeType: "image/png" }
+    { type: "image", image: "base64...", mimeType: "image/png" }
 - ToolCallPart: Tool invocations
-  {
-  type: "tool-call",
-  toolCallId: "id",
-  toolName: "bash",
-  args: { command: "ls" }
-  }
+    {
+        type: "tool-call",
+        toolCallId: "id",
+        toolName: "bash",
+        args: { command: "ls" }
+    }
 - ToolResultPart: Tool execution results
-  {
-  type: "tool-result",
-  toolCallId: "id",
-  toolName: "bash",
-  result: "output",
-  isError: false
-  }
+    {
+        type: "tool-result",
+        toolCallId: "id",
+        toolName: "bash",
+        result: "output",
+        isError: false
+    }
 
 STEP HANDLING:
 
 // Access step information in callbacks
 const handleStep = (step: Step) => {
-console.log(`Text: ${step.text}`);
-if (step.toolCalls) {
-for (const call of step.toolCalls) {
-console.log(`Tool: ${call.toolName}`);
-}
-}
-if (step.toolResults) {
-for (const result of step.toolResults) {
-console.log(`Result: ${result.result}`);
-}
-}
-console.log(`Tokens: ${step.usage?.totalTokens ?? 'N/A'}`);
+    console.log(`Text: ${step.text}`);
+    if (step.toolCalls) {
+        for (const call of step.toolCalls) {
+            console.log(`Tool: ${call.toolName}`);
+        }
+    }
+    if (step.toolResults) {
+        for (const result of step.toolResults) {
+            console.log(`Result: ${result.result}`);
+        }
+    }
+    console.log(`Tokens: ${step.usage?.totalTokens ?? 'N/A'}`);
 };
 
 const { messages, steps, text, output, usage } = await client.act({
-model: anthropic(),
-tools,
-system: "System context",
-prompt: "Task",
-onStep: handleStep
+    model: anthropic(),
+    tools,
+    system: "System context",
+    prompt: "Task",
+    onStep: handleStep
 });
 
 TOKEN USAGE:
@@ -111,16 +111,16 @@ const instance = await client.start();
 await instance.browser.start();
 
 const { messages, steps, text, output, usage } = await client.act({
-model: anthropic(),
-tools: [
-bashTool(instance),
-computerTool(instance),
-editTool(instance),
-browserTool(instance),
-],
-system: SYSTEM_PROMPT,
-prompt: "Go to the YC website and fetch the HTML",
-onStep: (step) => console.log(`${step}\n`),
+    model: anthropic(),
+    tools: [
+        bashTool(instance),
+        computerTool(instance),
+        editTool(instance),
+        browserTool(instance),
+    ],
+    system: SYSTEM_PROMPT,
+    prompt: "Go to the YC website and fetch the HTML",
+    onStep: (step) => console.log(`${step}\n`),
 });
 
 await instance.browser.stop();
@@ -134,17 +134,17 @@ EXECUTION PATTERNS:
 1. Basic agent execution:
 
 const { messages, steps, text, output, usage } = await client.act({
-model: anthropic(),
-tools,
-system: "System context here",
-prompt: "Task description"
+    model: anthropic(),
+    tools,
+    system: "System context here",
+    prompt: "Task description"
 });
 
 2. Browser automation:
 
 const cdpUrl = await instance.browser.start().cdpUrl;
-const authStateId = await instance.browser.saveAuth({ name: "default" }).authStateId; // Save auth
-await instance.browser.authenticate({ authStateId }); // Reuse auth
+const authStateId = await instance.browser.saveAuth({ name: "default" }).authStateId;  // Save auth
+await instance.browser.authenticate({ authStateId });  // Reuse auth
 
 3. File management:
 
@@ -165,18 +165,18 @@ ERROR HANDLING:
 
 import { ApiError } from "scrapybara/core";
 try {
-await client.start();
+    await client.start();
 } catch (e) {
-if (e instanceof ApiError) {
-console.error(`Error ${e.statusCode}: ${e.body}`);
-}
+    if (e instanceof ApiError) {
+        console.error(`Error ${e.statusCode}: ${e.body}`);
+    }
 }
 
 BROWSER TOOL OPERATIONS:
 
 - Required setup:
-  const cdpUrl = await instance.browser.start().cdpUrl;
-  const tools = [browserTool(instance)];
+const cdpUrl = await instance.browser.start().cdpUrl;
+const tools = [browserTool(instance)];
 - Commands: goTo, getHtml, evaluate, click, type, screenshot, getText, getAttribute
 - Always handle browser authentication states appropriately
 
