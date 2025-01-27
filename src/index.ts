@@ -1,12 +1,7 @@
 import { ScrapybaraClient } from "scrapybara";
 import { anthropic } from "scrapybara/anthropic";
-import { SYSTEM_PROMPT } from "scrapybara/prompts";
-import {
-  bashTool,
-  computerTool,
-  editTool,
-  browserTool,
-} from "scrapybara/tools";
+import { UBUNTU_SYSTEM_PROMPT } from "scrapybara/prompts";
+import { bashTool, computerTool, editTool } from "scrapybara/tools";
 import { z } from "zod";
 import * as dotenv from "dotenv";
 
@@ -18,20 +13,14 @@ async function main() {
   const client = new ScrapybaraClient({
     apiKey: process.env.SCRAPYBARA_API_KEY,
   });
-  const instance = await client.start();
-  instance.browser.start();
+  const instance = await client.startUbuntu();
 
   try {
     // Execute action
     const { output } = await client.act({
       model: anthropic(),
-      tools: [
-        bashTool(instance),
-        computerTool(instance),
-        editTool(instance),
-        browserTool(instance),
-      ],
-      system: SYSTEM_PROMPT,
+      tools: [bashTool(instance), computerTool(instance), editTool(instance)],
+      system: UBUNTU_SYSTEM_PROMPT,
       prompt: "Get the top 10 posts on Hacker News",
       schema: z.object({
         posts: z.array(
@@ -50,7 +39,6 @@ async function main() {
     console.log(posts);
   } finally {
     // Cleanup
-    await instance.browser.stop();
     await instance.stop();
   }
 }
