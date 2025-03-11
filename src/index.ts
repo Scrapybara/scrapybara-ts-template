@@ -1,6 +1,5 @@
 import { ScrapybaraClient } from "scrapybara";
-import { anthropic } from "scrapybara/anthropic";
-import { UBUNTU_SYSTEM_PROMPT } from "scrapybara/prompts";
+import { anthropic, UBUNTU_SYSTEM_PROMPT } from "scrapybara/anthropic";
 import { bashTool, computerTool, editTool } from "scrapybara/tools";
 import { z } from "zod";
 import * as dotenv from "dotenv";
@@ -13,6 +12,8 @@ async function main() {
   const client = new ScrapybaraClient({
     apiKey: process.env.SCRAPYBARA_API_KEY,
   });
+
+  // Start new instance
   const instance = await client.startUbuntu();
 
   try {

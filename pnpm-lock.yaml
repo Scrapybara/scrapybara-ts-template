@@ -12,8 +12,8 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       scrapybara:
-        specifier: ^2.2.1
-        version: 2.2.1
+        specifier: ^2.3.9
+        version: 2.3.9
     devDependencies:
       '@types/node':
         specifier: ^22.10.6
@@ -244,11 +244,6 @@ packages:
     resolution: {integrity: sha512-8e1++BCiTzUno9v5IZ2J6bv4RU+3UKDmqWUQD0MIMVCd9AdhWkO1gw57oo1mNEX1dMq2EGI+FbWz4B92pscSQg==}
     engines: {node: '>= 18'}
 
-  fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -308,16 +303,6 @@ packages:
     resolution: {integrity: sha512-kDCGIbxkDSXE3euJZZXzc6to7fCrKHNI/hSRQnRuQ+BWjFNzZwiFF8fj/6o2t2G9/jTj8PSIYTfCLelLZEeRpA==}
     engines: {node: '>= 0.4'}
 
-  playwright-core@1.49.1:
-    resolution: {integrity: sha512-BzmpVcs4kE2CH15rWfzpjzVGhWERJfmnXmniSyKeRZUs9Ws65m+RGIi7mjJK/euCegfn3i7jvqWeWyHe9y3Vgg==}
-    engines: {node: '>=18'}
-    hasBin: true
-
-  playwright@1.49.1:
-    resolution: {integrity: sha512-VYL8zLoNTBxVOrJBbDuRgDWa3i+mfQgDTrL8Ah9QXZ7ax4Dsj0MSq5bYgytRnDVVe+njoKnfsYkH3HzqVj5UZA==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   process@0.11.10:
     resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
@@ -336,8 +321,8 @@ packages:
   safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
 
-  scrapybara@2.2.1:
-    resolution: {integrity: sha512-Py5SHYdlZ37DQH1H6LlCdPnzS2bdMo8+DThyUjBfZwohl3rcByRkYnYeEBUdu/Xql9gB2+MPhY7Htif9Ub+PvA==}
+  scrapybara@2.3.9:
+    resolution: {integrity: sha512-qq4JweVesyd0VjZ9Q2RCulVr1fyrk5TI763pxqxeP5+BoRycctNtodvr2qR2LpX23O3LQZWap6q8apsFfnPlJQ==}
 
   side-channel-list@1.0.0:
     resolution: {integrity: sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==}
@@ -553,9 +538,6 @@ snapshots:
 
   formdata-node@6.0.3: {}
 
-  fsevents@2.3.2:
-    optional: true
-
   fsevents@2.3.3:
     optional: true
 
@@ -607,14 +589,6 @@ snapshots:
 
   object-inspect@1.13.3: {}
 
-  playwright-core@1.49.1: {}
-
-  playwright@1.49.1:
-    dependencies:
-      playwright-core: 1.49.1
-    optionalDependencies:
-      fsevents: 2.3.2
-
   process@0.11.10: {}
 
   qs@6.14.0:
@@ -633,12 +607,11 @@ snapshots:
 
   safe-buffer@5.2.1: {}
 
-  scrapybara@2.2.1:
+  scrapybara@2.3.9:
     dependencies:
       form-data: 4.0.1
       formdata-node: 6.0.3
       node-fetch: 2.7.0
-      playwright: 1.49.1
       qs: 6.14.0
       readable-stream: 4.7.0
       url-join: 4.0.1
