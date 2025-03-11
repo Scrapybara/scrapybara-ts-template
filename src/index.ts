@@ -1,5 +1,5 @@
 import { ScrapybaraClient } from "scrapybara";
-import { anthropic, UBUNTU_SYSTEM_PROMPT } from "scrapybara/anthropic";
+import { openai, UBUNTU_SYSTEM_PROMPT } from "scrapybara/openai";
 import { bashTool, computerTool, editTool } from "scrapybara/tools";
 import { z } from "zod";
 import * as dotenv from "dotenv";
@@ -19,7 +19,7 @@ async function main() {
   try {
     // Execute action
     const { output } = await client.act({
-      model: anthropic(),
+      model: openai(),
       tools: [bashTool(instance), computerTool(instance), editTool(instance)],
       system: UBUNTU_SYSTEM_PROMPT,
       prompt: "Get the top 10 posts on Hacker News",

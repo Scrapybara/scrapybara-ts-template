@@ -12,8 +12,11 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       scrapybara:
-        specifier: ^2.3.9
-        version: 2.3.9
+        specifier: ^2.4.0
+        version: 2.4.0
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
     devDependencies:
       '@types/node':
         specifier: ^22.10.6
@@ -321,8 +324,8 @@ packages:
   safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
 
-  scrapybara@2.3.9:
-    resolution: {integrity: sha512-qq4JweVesyd0VjZ9Q2RCulVr1fyrk5TI763pxqxeP5+BoRycctNtodvr2qR2LpX23O3LQZWap6q8apsFfnPlJQ==}
+  scrapybara@2.4.0:
+    resolution: {integrity: sha512-znxJyjPkLdssli7b9C5Z4TEfLjREiZ34R92l8m/y0d0kGJ/PvS00UJI5AfnqqroOOby8XObzexIugp88YsD8wg==}
 
   side-channel-list@1.0.0:
     resolution: {integrity: sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==}
@@ -373,8 +376,8 @@ packages:
     peerDependencies:
       zod: ^3.24.1
 
-  zod@3.24.1:
-    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
 snapshots:
 
@@ -607,7 +610,7 @@ snapshots:
 
   safe-buffer@5.2.1: {}
 
-  scrapybara@2.3.9:
+  scrapybara@2.4.0:
     dependencies:
       form-data: 4.0.1
       formdata-node: 6.0.3
@@ -615,8 +618,8 @@ snapshots:
       qs: 6.14.0
       readable-stream: 4.7.0
       url-join: 4.0.1
-      zod: 3.24.1
-      zod-to-json-schema: 3.24.1(zod@3.24.1)
+      zod: 3.24.2
+      zod-to-json-schema: 3.24.1(zod@3.24.2)
     transitivePeerDependencies:
       - encoding
 
@@ -674,8 +677,8 @@ snapshots:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
 
-  zod-to-json-schema@3.24.1(zod@3.24.1):
+  zod-to-json-schema@3.24.1(zod@3.24.2):
     dependencies:
-      zod: 3.24.1
+      zod: 3.24.2
 
-  zod@3.24.1: {}
+  zod@3.24.2: {}
