@@ -46,6 +46,7 @@ Then edit `.env` with your API keys:
 ```bash
 SCRAPYBARA_API_KEY=your_api_key_here
 ANTHROPIC_API_KEY=your_api_key_here  # Optional
+OPENAI_API_KEY=your_api_key_here  # Optional
 ```
 
 ## Project Structure
@@ -117,6 +118,11 @@ Modify the model initialization to use your own API key:
 model: anthropic({
   name: "claude-3-7-sonnet-20240219-thinking",
   apiKey: process.env.ANTHROPIC_API_KEY,
+});
+// or
+model: openai({
+  name: "computer-use-preview-2025-02-04",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 ```
 
