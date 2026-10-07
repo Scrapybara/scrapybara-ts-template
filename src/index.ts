@@ -14,7 +14,7 @@ async function main() {
   });
 
   // Start new instance
-  const instance = await client.startUbuntu();
+  const instance = await client.startUbuntu({ timeoutHours: 0.5 });
 
   try {
     // Execute action
